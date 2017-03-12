@@ -7,8 +7,9 @@ import pandas as pd
 def load_data():
     
     # loading data
-    train_data  = pd.read_csv("E:/Kaggle/Digit Recognizer/train.csv")
-    testdata    = pd.read_csv("E:/Kaggle/Digit Recognizer/test.csv")
+    train_data  = pd.read_csv("../samle_data_4000.csv")
+    # testdata    = pd.read_csv("../test.csv")
+    # commenting this as there is no test data in the location
     
     # selecting training and validation samples using a random split
     train_7 = train_data.sample(frac=0.7)
@@ -20,6 +21,8 @@ def load_data():
     train_7         = train_7.drop(['label'], axis = 1)
     x_train         = tuple(map(tuple, train_7.values))
     training_data   = zip(x_train, y_train)
+    # transposing the tuple to match with the requirements in load_data_wrapper
+    # as given in the tutorial
     training_data   = zip(*training_data)
 
     y_validation    = val_7['label'].ravel()
@@ -63,6 +66,7 @@ def load_data_wrapper():
     training_inputs     = [np.reshape(x, (784, 1)) for x in tr_d[0]]
     training_results    = [vectorized_result(y) for y in tr_d[1]]
     training_data       = zip(training_inputs, training_results)
+    # transposing the tuple
     training_data       = zip(*training_data)
     
     validation_inputs   = [np.reshape(x, (784, 1)) for x in va_d[0]]
