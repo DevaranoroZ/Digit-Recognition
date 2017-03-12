@@ -21,21 +21,16 @@ def load_data():
     train_7         = train_7.drop(['label'], axis = 1)
     x_train         = tuple(map(tuple, train_7.values))
     training_data   = zip(x_train, y_train)
-    # transposing the tuple to match with the requirements in load_data_wrapper
-    # as given in the tutorial
-    training_data   = zip(*training_data)
 
     y_validation    = val_7['label'].ravel()
     val_7           = val_7.drop(['label'], axis = 1)
     x_validation    = tuple(map(tuple, val_7.values))
     validation_data = zip(x_validation, y_validation)
-    validation_data = zip(*validation_data)
 
     # taking a dummy y_test to have continuity in the code and data
     x_test          = tuple(map(tuple, testdata.values))
     y_test          = testdata['pixel0'].ravel() # a dummy value
     test_data       = zip(x_test, y_test)
-    test_data       = zip(*test_data)
     
     return (training_data, validation_data, test_data)
 
